@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You will be missed, <%= @user.first_name %>!</h1>
+    <p>
+      Your record has been deleted.
+      If this was a mistake please reach out.
+    </p>
+    <%= link_to 'Login', @url %>
+  </body>
+</html>

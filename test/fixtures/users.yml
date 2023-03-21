@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  phone: MyString
-  height: 1.5
-  weight: 1.5
+  first_name: John
+  last_name: Doe
+  email: johndoe@mail.com
+  phone: 555-123-4567
+  height: 1.75
+  weight: 70.5
 
 two:
   first_name: MyString
   last_name: MyString
-  email: MyString
-  phone: MyString
+  email: MyString@mail.com
+  phone: 2222222222
   height: 1.5
   weight: 1.5
