@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UserManagement</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <html data-theme="synthwave"></html>
+  </head>
+  <body>
+    <header>
+      <div class="min-h-1/2 hero">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="text-center hero-content text-neutral-content">
+          <div class="max-w-md">
+            <h1 class="mb-5 text-5xl font-bold"><%= link_to "Hire Me Please :)", root_path %></h1>
+            <label for="theme" class="block text-base font-medium text-gray-300">Choose Your Theme</label>
+            <%= render 'shared/choose_theme' %>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container flex px-5 mx-auto mt-2">
+      <%= turbo_frame_tag "modal" %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

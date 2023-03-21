@@ -1,0 +1,16 @@
+<div class="flex w-full mx-auto md:w-2/3">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+    <% end %>
+    <%= render user %>
+    <%= link_to 'Edit this user', edit_user_path(@user), data: {turbo_frame: "modal"}, class: "btn btn-secondary" %>
+    <%= link_to "Cancel", "#", data: {
+    controller: "modals",
+    action: "modals#close"
+    }, class: "btn btn-warning" %>
+    <div class="inline-block ml-2">
+      <%= button_to 'Destroy this user', user_path(@user), method: :delete, class: "btn btn-error" %>
+    </div>
+  </div>
+</div>

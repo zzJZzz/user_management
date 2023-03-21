@@ -1,0 +1,69 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+  <% end %>
+  <div class="flex items-center justify-between">
+    <h1 class="text-4xl font-bold">Users</h1>
+    <%= link_to 'New User', new_user_path, data: { turbo_frame: "modal" }, class: "btn btn-primary" %>
+  </div>
+  <div>
+    <%= search_form_for @q do |f| %>
+      <%= f.search_field :first_name_or_last_name_or_email_cont, class: "text-black", placeholder: "Name or Email" %>
+      <%= f.submit "Search", class: "btn btn-outline btn-info" %>
+    <% end %>
+  </div>
+  <div id="users" class="min-w-full" data-controller="users-bulk">
+    <% if @users.present? %>
+      <table class="table w-full table-zebra">
+        <thead>
+          <tr>
+            <th><%= sort_link @q, :id, "ID" %></th>
+            <th><%= sort_link @q, :first_name, "Name" %></th>
+            <th><%= sort_link @q, :email, "Email" %></th>
+            <th><%= sort_link @q, :phone, "Phone" %></th>
+            <th><%= sort_link @q, :height, "Height" %></th>
+            <th><%= sort_link @q, :weight, "Weight" %></th>
+            <th>Actions</th>
+            <th>
+              <div data-controller="checkbox-select-all">
+                <%= check_box_tag nil, nil, false, id: "select_all", data: { target: "users-bulk.checkboxAll", checkbox_select_all_target: "parent", action: "change->checkbox-select-all#toggleChildren" } %>
+                <label for="select_all">Select All</label>
+              </div>
+            </th>
+            <!-- add more column headers here. Would need to add to schema.-->
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <%# <% cache user do %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= "#{user.first_name} #{user.last_name}" %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.height %></td>
+                <td><%= user.weight %></td>
+                <td>
+                  <%= link_to 'Edit this user', edit_user_path(user), data: {turbo_frame: "modal"}, class: "btn btn-secondary" %>
+                </td>
+                <td>
+                  <%= button_to 'Destroy this user', user_path(user), method: :delete, class: "btn btn-error" %>
+                </td>
+                <td>
+                  <div data-controller="checkbox-select-all">
+                    <input type="checkbox" id="user_<%= user.id %>" name="user_<%= user.id %>" value="<%= user.id %>" data-checkbox-select-all-target="child" data-action="change->checkbox-select-all#toggleParent">
+                  </div>
+                </td>
+                <!-- add more table cells here. Would need to add to schema. -->
+              </tr>
+              <%# end %>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to "Delete All", "#", data: { action: "click->users-bulk#destroy" }, class: "btn btn-warning" %>
+        <%== pagy_nav(@pagy) %>
+      <% else %>
+        <p>No users found. Fetching data from the API...</p>
+      <% end %>
+    </div>
+  </div>

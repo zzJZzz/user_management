@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "modal" do %>
+  <!-- Modal backdrop -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
+    <!-- Modal container -->
+    <div class="w-1/2 p-6 mx-4 bg-white rounded-lg shadow-lg sm:p-8 sm:mx-auto">
+      <!-- Modal content -->
+      <div class="text-black">
+        <h3 class="text-lg">New User</h3>
+        <%= render "form", user: @user %>
+      </div>
+      <div>
+        <%= link_to "Cancel", "#", data: {
+        controller: "modals",
+        action: "modals#close"
+      }, class: "btn btn-warning" %>
+      </div>
+    </div>
+  <% end%>
