@@ -20,12 +20,8 @@ class User < ApplicationRecord
     DeletedUserNotificationWorker.perform_in(30.minutes, id)
   end
 
-  # def purge_cache(user)
-  #   expire_fragment(user)
-
-  #   users_orders = user.orders
-  #   users_orders.each do |order|
-  #     expire_fragment(order)
-  #   end
+  # TODO: Purge cache for user
+  # def purge_cache
+  # Rails.cache.delete
   # end
 end
