@@ -8,11 +8,11 @@ class User < ApplicationRecord
   validates :height, presence: true, numericality: { greater_than: 0 }
   validates :weight, presence: true, numericality: { greater_than: 0 }
 
-  after_create :purge_cache
-  after_update :purge_cache
+  # after_create :purge_cache
+  # after_update :purge_cache
 
   before_destroy :schedule_deleted_user_notification
-  after_destroy :purge_cache
+  # after_destroy :purge_cache
 
   private
 
@@ -20,12 +20,12 @@ class User < ApplicationRecord
     DeletedUserNotificationWorker.perform_in(30.minutes, id)
   end
 
-  def purge_cache(user)
-    expire_fragment(user)
+  # def purge_cache(user)
+  #   expire_fragment(user)
 
-    users_orders = user.orders
-    users_orders.each do |order|
-      expire_fragment(order)
-    end
-  end
+  #   users_orders = user.orders
+  #   users_orders.each do |order|
+  #     expire_fragment(order)
+  #   end
+  # end
 end
